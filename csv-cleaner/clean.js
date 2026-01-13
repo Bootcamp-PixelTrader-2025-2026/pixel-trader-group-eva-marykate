@@ -1,6 +1,7 @@
 const fs = require("fs");
 const csv = require("csv-parser");
 const { createObjectCsvWriter } = require("csv-writer");
+let platformCorrected;
 
 const CSV_SEPARATOR = ";";
 
@@ -14,6 +15,7 @@ const CURRENCY_RATES = {
   YEN: 0.006,
   "¥": 0.006
 };
+
 
 const cleanedGames = [];
 const gamesMissingYear = [];
@@ -44,6 +46,63 @@ function convertPriceToEuro(textPrice) {
   return euroValue + " €";
 }
 
+function cleanPlatform(input) {
+  if (!input) return 'UNKNOWN';
+
+  const map = {
+    'playstation': 'PS1',
+    'playstation 1': 'PS1',
+    'ps1': 'PS1',
+    'psx': 'PS1',
+
+    'playstation 2': 'PS2',
+    'ps2': 'PS2',
+
+    'ps3': 'PS3',
+
+    'nintendo 64': 'N64',
+    'n64': 'N64',
+
+    'super nintendo': 'SNES',
+    'snes': 'SNES',
+
+    'nes': 'NES',
+
+    'gameboy': 'GB',
+    'game boy': 'GB',
+
+    'gameboy color': 'GBC',
+
+    'gba': 'GBA',
+    'game boy advance': 'GBA',
+
+    'gamecube': 'GC',
+    'gcn': 'GC',
+    'gc': 'GC',
+
+    'switch': 'SWITCH',
+
+    'sega mega drive': 'MD',
+    'megadrive': 'MD',
+    'master system': 'MS',
+    'dreamcast': 'DC',
+    'saturn': 'SAT',
+
+    'pc': 'PC',
+    'arcade': 'ARCADE',
+    'atari 2600': 'ATARI2600',
+    'xbox' : 'XBOX'
+  };
+
+  const key = input
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9 ]/g, '')
+    .replace(/\s+/g, ' ');
+
+  return map[key] || 'UNKNOWN';
+}
+
 
 fs.createReadStream("stock_legacy_full.csv")
   .pipe(csv({ separator: CSV_SEPARATOR }))
@@ -64,12 +123,16 @@ fs.createReadStream("stock_legacy_full.csv")
       gamesMissingYear.push(row);
     }
 
+    platformCorrected = cleanPlatform(row.plateforme);
+    
     cleanedGames.push({
       ...row,
       prix_achat: purchasePrice,
       valeur_estimee: estimatedValue,
-      etat: state
+      etat: state,
+      plateforme : platformCorrected
     });
+
   })
   .on("end", async () => {
     const cleanedWriter = createObjectCsvWriter({
