@@ -1,0 +1,27 @@
+{
+  "name": "pixel-trader-group-eva-marykate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bootcamp-PixelTrader-2025-2026/pixel-trader-group-eva-marykate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Bootcamp-PixelTrader-2025-2026/pixel-trader-group-eva-marykate/issues"
+  },
+  "homepage": "https://github.com/Bootcamp-PixelTrader-2025-2026/pixel-trader-group-eva-marykate#readme",
+  "dependencies": {
+    "csv-parser": "^3.2.0",
+    "csv-writer": "^1.6.0",
+    "csvtojson": "^2.0.14",
+    "mysql": "^2.18.1"
+  }
+}
