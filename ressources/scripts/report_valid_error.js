@@ -53,16 +53,14 @@
 // #     print("CSV VALIDÉ ")
 // #     print(f"{count_total} lignes vérifiées sans erreur")
 
-
 // # # lancer le script : python report_valid_error.py
-
 
 const fs = require("fs");
 const path = require("path");
 const csv = require("csv-parser");
 
-const INPUT_FILE = "output/stock_clean.csv";
-const ERROR_FILE = "output/report_valid_error.csv";
+const INPUT_FILE = "../output/stock_clean.csv";
+const ERROR_FILE = "../output/report_valid_error.csv";
 
 const validStates = ["Excellent", "Bon", "Moyen", "Mauvais"];
 
@@ -96,7 +94,7 @@ fs.createReadStream(INPUT_FILE)
       errors.push(`Etat invalide: ${etat}`);
     }
 
-    const dateSortie = (row.date_sortie || "").trim();
+    const dateSortie = (row.annee_sortie || "").trim();
     if (!dateSortie) {
       errors.push("Date de sortie manquante");
     }
