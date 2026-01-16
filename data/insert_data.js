@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 const jsonData = require('../csv_cleaner/stock.json');
+const var_dump = require('var_dump');
+
 
 const con = mysql.createConnection({
   host: "localhost",
@@ -67,7 +69,7 @@ con.connect(async (err) => {
       );
       if (!plateformeRows.length) throw new Error(`Plateforme not found: ${plateformeName}`);
       const id_plateforme = plateformeRows[0].id_plateforme;
-
+      console.log("Inserting year:", item.annee_sortie, "Type:", typeof item.annee_sortie);
       const jeuxResult = await query(
         `INSERT INTO jeux 
          (titre, annee_sortie, etat, id_emplacement, valeur_estimee, prix_achat)
@@ -81,14 +83,17 @@ con.connect(async (err) => {
           item.prix_achat
         ]
       );
-      const id_jeux = jeuxResult.insertId;
+        // console.log(item.annee_sortie);
+        var_dump(item.annee_sortie);
+
+        const id_jeux = jeuxResult.insertId;
 
       await query(
         "INSERT IGNORE INTO jeux_plateforme (id_jeux, id_plateforme) VALUES (?, ?)",
         [id_jeux, id_plateforme]
       );
 
-      console.log(`Inserted: ${item.titre_jeu}`);
+    //   console.log(`Inserted: ${item.titre_jeu}`);
     }
 
     console.log("All data inserted successfully!");
