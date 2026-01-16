@@ -4,7 +4,7 @@ const jsonData = require('../csv_cleaner/stock.json');
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Regular001!!",
+  password: "",
   database: "jeux_db"
 });
 

@@ -1,0 +1,1 @@
+export { default } from "file:///C:/Users/evabo/OneDrive/Documents/IIM/Bootcamp/J-1/Projet/frontend/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
