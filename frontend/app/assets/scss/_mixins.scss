@@ -1,0 +1,4 @@
+@mixin neon-glow($color) {
+  color: $color;
+  text-shadow: 0 0 5px $color, 0 0 10px $color, 0 0 20px $color;
+}

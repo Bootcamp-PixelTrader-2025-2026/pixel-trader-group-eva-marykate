@@ -1,0 +1,39 @@
+.sidebar {
+  width: 220px;
+  background-color: #111;
+  color: #00ffc3;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h2 {
+    margin-bottom: 30px;
+    font-size: 1.2em;
+    border-bottom: 2px solid #00ffc3;
+    padding-bottom: 15px;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  a {
+    color: #00ffc3;
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  a:hover {
+    border-bottom: 2px solid #00ffc3;
+  }
+
+  a.router-link-exact-active {
+    font-weight: bold;
+    border-bottom: 2px solid #00ffc3;
+  }
+}

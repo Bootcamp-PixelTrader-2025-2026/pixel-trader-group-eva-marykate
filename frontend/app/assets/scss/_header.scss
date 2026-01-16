@@ -1,0 +1,9 @@
+.header {
+  padding: 10px 20px;
+  border-bottom: 1px solid $bg-light;
+
+  h1 {
+    @include neon-glow($primary);
+    margin: 0;
+  }
+}
